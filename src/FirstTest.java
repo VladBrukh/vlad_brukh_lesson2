@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -40,7 +39,7 @@ public class FirstTest {
     }
 
     @Test
-    public void firstTest()
+    public void cancelSearch()
     {
         waitForElementAndClick(
                 By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
@@ -48,14 +47,42 @@ public class FirstTest {
                 5
         );
 
-        WebElement search_field = waitForElementPresent(
+        waitForElementAndSendKeys(
                 By.id("org.wikipedia:id/search_src_text"),
-                "Cannot find search field",
-                10
+                "Dracula",
+                "Cannot find search input",
+                15
         );
 
-        String search_text = search_field.getAttribute("text");
-        Assert.assertTrue("The text \"Search…\" not found in the search field",search_text.contains("Search…"));
+        waitForElementPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[contains(@text, '1897 Gothic horror novel by Irish author Bram Stoker')]"),
+                "Cannot find article with '1897 Gothic horror novel by Irish author Bram Stoker' text searching by 'Dracula'",
+                15
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[contains(@text, '2014 American dark fantasy action horror film directed by Gary Shore')]"),
+                "Cannot find article with '2014 American dark fantasy action horror film directed by Gary Shore' text searching by 'Dracula'",
+                15
+        );
+
+        waitForElementAndClear(
+                By.id("org.wikipedia:id/search_src_text"),
+                "Cannot find search field",
+                5
+        );
+
+        waitForElementNotPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[contains(@text, '2014 American dark fantasy action horror film directed by Gary Shore')]"),
+                "The article with '2014 American dark fantasy action horror film directed by Gary Shore' text searching by 'Dracula' is still visible",
+                15
+        );
+
+        waitForElementNotPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[contains(@text, '2014 American dark fantasy action horror film directed by Gary Shore')]"),
+                "The article with '2014 American dark fantasy action horror film directed by Gary Shore' text searching by 'Dracula' is still visible",
+                15
+        );
 
     }
 
@@ -70,6 +97,27 @@ public class FirstTest {
     {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
         element.click();
+        return element;
+    }
+
+    private WebElement waitForElementAndSendKeys(By by, String value, String error_message, long timeoutInSeconds)
+    {
+        WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
+        element.sendKeys(value);
+        return element;
+    }
+
+    private boolean waitForElementNotPresent(By by, String error_message, long timeoutInSeconds)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
+        wait.withMessage(error_message + "\n");
+        return wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+    }
+
+    private WebElement waitForElementAndClear(By by, String error_message, long timeoutInSeconds)
+    {
+        WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
+        element.clear();
         return element;
     }
 
