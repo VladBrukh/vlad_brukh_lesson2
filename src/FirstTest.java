@@ -39,7 +39,7 @@ public class FirstTest {
     }
 
     @Test
-    public void cancelSearch()
+    public void searchResults()
     {
         waitForElementAndClick(
                 By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
@@ -54,35 +54,55 @@ public class FirstTest {
                 15
         );
 
-        waitForElementPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[contains(@text, '1897 Gothic horror novel by Irish author Bram Stoker')]"),
-                "Cannot find article with '1897 Gothic horror novel by Irish author Bram Stoker' text searching by 'Dracula'",
+        waitForElementHasWord(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[@text='Dracula']"),
+                "Dracula",
+                "The article with 'Dracula' title does not exist",
                 15
         );
 
-        waitForElementPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[contains(@text, '2014 American dark fantasy action horror film directed by Gary Shore')]"),
-                "Cannot find article with '2014 American dark fantasy action horror film directed by Gary Shore' text searching by 'Dracula'",
+        waitForElementHasWord(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[@text='Dracula Untold']"),
+                "Dracula",
+                "The article with 'Dracula Untold' title does not exist",
                 15
         );
 
-        waitForElementAndClear(
-                By.id("org.wikipedia:id/search_src_text"),
-                "Cannot find search field",
-                5
-        );
-
-        waitForElementNotPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[contains(@text, '2014 American dark fantasy action horror film directed by Gary Shore')]"),
-                "The article with '2014 American dark fantasy action horror film directed by Gary Shore' text searching by 'Dracula' is still visible",
+        waitForElementHasWord(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[@text='Dracula in popular culture']"),
+                "Dracula",
+                "The article with 'Dracula in popular culture' title does not exist",
                 15
         );
 
-        waitForElementNotPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[contains(@text, '2014 American dark fantasy action horror film directed by Gary Shore')]"),
-                "The article with '2014 American dark fantasy action horror film directed by Gary Shore' text searching by 'Dracula' is still visible",
+        waitForElementHasWord(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[@text='Dracula (1931 English-language film)']"),
+                "Dracula",
+                "The article with 'Dracula (1931 English-language film)' title does not exist",
                 15
         );
+
+        waitForElementHasWord(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[@text='Dracula (1958 film)']"),
+                "Dracula",
+                "The article with 'Dracula (1958 film)' title does not exist",
+                15
+        );
+
+        waitForElementHasWord(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[@text='Dracula (1924 play)']"),
+                "Dracula",
+                "The article with 'Dracula (1924 play)' title does not exist",
+                15
+        );
+
+        waitForElementHasWord(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[@text='Dracula (Marvel Comics)']"),
+                "Dracula",
+                "The article with 'Dracula (Marvel Comics)' title does not exist",
+                15
+        );
+
 
     }
 
@@ -119,6 +139,13 @@ public class FirstTest {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
         element.clear();
         return element;
+    }
+
+    private void waitForElementHasWord(By by, String word, String error_message, long timeoutInSeconds)
+    {
+        WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
+        String article = element.getAttribute("text");
+        Assert.assertTrue("The article " + article + " does not contain word " + word,article.contains(word));
     }
 
 }
