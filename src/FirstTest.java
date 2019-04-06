@@ -39,8 +39,9 @@ public class FirstTest {
     }
 
     @Test
-    public void searchResults()
+    public void swipeArticle()
     {
+
         waitForElementAndClick(
                 By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
                 "Cannot find 'Search Wikipedia' input",
@@ -49,57 +50,8 @@ public class FirstTest {
 
         waitForElementAndSendKeys(
                 By.id("org.wikipedia:id/search_src_text"),
-                "Dracula",
+                "Java",
                 "Cannot find search input",
-                15
-        );
-
-        waitForElementHasWord(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[@text='Dracula']"),
-                "Dracula",
-                "The article with 'Dracula' title does not exist",
-                15
-        );
-
-        waitForElementHasWord(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[@text='Dracula Untold']"),
-                "Dracula",
-                "The article with 'Dracula Untold' title does not exist",
-                15
-        );
-
-        waitForElementHasWord(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[@text='Dracula in popular culture']"),
-                "Dracula",
-                "The article with 'Dracula in popular culture' title does not exist",
-                15
-        );
-
-        waitForElementHasWord(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[@text='Dracula (1931 English-language film)']"),
-                "Dracula",
-                "The article with 'Dracula (1931 English-language film)' title does not exist",
-                15
-        );
-
-        waitForElementHasWord(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[@text='Dracula (1958 film)']"),
-                "Dracula",
-                "The article with 'Dracula (1958 film)' title does not exist",
-                15
-        );
-
-        waitForElementHasWord(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[@text='Dracula (1924 play)']"),
-                "Dracula",
-                "The article with 'Dracula (1924 play)' title does not exist",
-                15
-        );
-
-        waitForElementHasWord(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[@text='Dracula (Marvel Comics)']"),
-                "Dracula",
-                "The article with 'Dracula (Marvel Comics)' title does not exist",
                 15
         );
 
