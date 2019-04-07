@@ -65,6 +65,7 @@ public class FirstTest {
                 25
         );
 
+        
         waitForElementPresent(
                 By.xpath("//*[contains(@text, '" + article_description + "')]"),
                 "The article with " + article_description + " is not opened",
