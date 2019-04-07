@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -40,7 +41,47 @@ public class FirstTest {
     }
 
     @Test
-    public void assertTitleFound() {
+    public void changeScreenOrientation() {
+
+        checkScreenOrientation();
+
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "Cannot find 'Search Wikipedia' input",
+                5
+        );
+
+        String search_word = "Dracula";
+        String article_description = "2014 American dark pantasy action horror film directed by Gary Shore";
+
+        waitForElementAndSendKeys(
+                By.id("org.wikipedia:id/search_src_text"),
+                search_word,
+                "Cannot find search input",
+                15
+        );
+
+        driver.rotate(ScreenOrientation.LANDSCAPE);
+
+        waitForElementAndClick(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[contains(@text, '" + article_description + "')]"),
+                "Cannot find article with " + article_description + " text searching by " + search_word,
+                25
+        );
+
+        
+        waitForElementPresent(
+                By.xpath("//*[contains(@text, '" + article_description + "')]"),
+                "The article with " + article_description + " is not opened",
+                15
+        );
+        
+    }
+
+    @Test
+    public void changeScreenOrientation_two() {
+
+        checkScreenOrientation();
 
         waitForElementAndClick(
                 By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
@@ -50,7 +91,6 @@ public class FirstTest {
 
         String search_word = "Dracula";
         String article_description = "2014 American dark fantasy action horror film directed by Gary Shore";
-        String title = "Dracula Untold";
 
         waitForElementAndSendKeys(
                 By.id("org.wikipedia:id/search_src_text"),
@@ -65,21 +105,13 @@ public class FirstTest {
                 25
         );
 
-        
+
         waitForElementPresent(
                 By.xpath("//*[contains(@text, '" + article_description + "')]"),
                 "The article with " + article_description + " is not opened",
                 15
         );
 
-        String title_element = "//android.widget.FrameLayout//*[@text='" + title + "']";
-
-        assertElementPresent(
-                By.xpath(title_element),
-                "The title " + title + " is not found in the article with description " + article_description
-        );
-
-        
     }
 
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds) {
@@ -175,7 +207,13 @@ public class FirstTest {
 
         }
 
+    }
 
+    public void checkScreenOrientation() {
+        ScreenOrientation orientation = driver.getOrientation();
+        if(orientation == ScreenOrientation.LANDSCAPE) {
+            driver.rotate(ScreenOrientation.PORTRAIT);
+        }
     }
 
 }
