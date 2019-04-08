@@ -13,15 +13,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 public class FirstTest {
 
     private AppiumDriver driver;
 
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         capabilities.setCapability("platformName", "Android");
@@ -36,23 +35,26 @@ public class FirstTest {
     }
 
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
         driver.quit();
     }
 
     @Test
-    public void saveArticles()
-    {
+    public void assertTitleFound() {
+
         waitForElementAndClick(
                 By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
                 "Cannot find 'Search Wikipedia' input",
                 25
         );
 
+        String search_word = "Dracula";
+        String article_description = "2014 American dark fantasy action horror film directed by Gary Shore";
+        String title = "Dracula Untold";
+
         waitForElementAndSendKeys(
                 By.id("org.wikipedia:id/search_src_text"),
-                "Dracula",
+                search_word,
                 "Cannot find search input",
                 25
         );
@@ -87,11 +89,23 @@ public class FirstTest {
                 25
         );
 
-        waitForElementAndSendKeys(
-                By.id("org.wikipedia:id/text_input"),
-                "Dracula folder",
-                "Cannot input text into article folder input",
+        waitForElementAndClick(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_container']//*[contains(@text, '" + article_description + "')]"),
+                "Cannot find article with " + article_description + " text searching by " + search_word,
                 25
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[contains(@text, '" + article_description + "')]"),
+                "The article with " + article_description + " is not opened",
+                15
+        );
+
+        String title_element = "//android.widget.FrameLayout//*[@text='" + title + "']";
+
+        assertElementPresent(
+                By.xpath(title_element),
+                "The title " + title + " is not found in the article with description " + article_description
         );
 
         waitForElementAndClick(
@@ -200,50 +214,43 @@ public class FirstTest {
                 title_opened);
     }
 
-    private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds)
-    {
+    private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
         wait.withMessage(error_message + "\n");
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
-    private WebElement waitForElementAndClick(By by, String error_message, long timeoutInSeconds)
-    {
+    private WebElement waitForElementAndClick(By by, String error_message, long timeoutInSeconds) {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
         element.click();
         return element;
     }
 
-    private WebElement waitForElementAndSendKeys(By by, String value, String error_message, long timeoutInSeconds)
-    {
+    private WebElement waitForElementAndSendKeys(By by, String value, String error_message, long timeoutInSeconds) {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
         element.sendKeys(value);
         return element;
     }
 
-    private boolean waitForElementNotPresent(By by, String error_message, long timeoutInSeconds)
-    {
+    private boolean waitForElementNotPresent(By by, String error_message, long timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
         wait.withMessage(error_message + "\n");
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
     }
 
-    private WebElement waitForElementAndClear(By by, String error_message, long timeoutInSeconds)
-    {
+    private WebElement waitForElementAndClear(By by, String error_message, long timeoutInSeconds) {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
         element.clear();
         return element;
     }
 
-    private void waitForElementHasWord(By by, String word, String error_message, long timeoutInSeconds)
-    {
+    private void waitForElementHasWord(By by, String word, String error_message, long timeoutInSeconds) {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
         String article = element.getAttribute("text");
-        Assert.assertTrue("The article " + article + " does not contain word " + word,article.contains(word));
+        Assert.assertTrue("The article " + article + " does not contain word " + word, article.contains(word));
     }
 
-    protected void swipeUp(int timeOfSwipe)
-    {
+    protected void swipeUp(int timeOfSwipe) {
         TouchAction action = new TouchAction(driver);
         Dimension size = driver.manage().window().getSize();
         int x = size.width / 2;
@@ -258,13 +265,11 @@ public class FirstTest {
                 .perform();
     }
 
-    protected void swipeUpQuick()
-    {
+    protected void swipeUpQuick() {
         swipeUp(200);
     }
 
-    protected void swipeElementToLeft(By by, String error_message)
-    {
+    protected void swipeElementToLeft(By by, String error_message) {
         WebElement element = waitForElementPresent(
                 by,
                 error_message,
@@ -287,5 +292,24 @@ public class FirstTest {
 
     }
 
+    private int getAmountOfElements(By by) {
+
+        List elements = driver.findElements(by);
+        return elements.size();
+
+    }
+
+    private void assertElementPresent(By searchable_element, String error_message) {
+        int amount_of_elements = getAmountOfElements(searchable_element);
+        if (amount_of_elements == 0) {
+            String default_message = "An element '" + searchable_element.toString() + "' is not present\n";
+            throw new AssertionError(default_message + " " + error_message);
+
+        }
+
+
+    }
 
 }
+
+
