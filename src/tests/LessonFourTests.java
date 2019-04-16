@@ -92,4 +92,17 @@ public class LessonFourTests extends CoreTestCase {
         );
 
     }
+
+    @Test
+    public void testSearchArticleByTitleAndDescription () {
+
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+
+        SearchPageObject.initSearchInput();
+        SearchPageObject.typeSearchLine("Dracula");
+        SearchPageObject.waitForElementByTitleAndDescription("Dracula Untold", "2014 American dark fantasy action horror film directed by Gary Shore");
+        SearchPageObject.waitForElementByTitleAndDescription("Dracula in popular culture", "Wikimedia list article");
+        SearchPageObject.waitForElementByTitleAndDescription("Dracula (1924 play)", "1924 stage play");
+
+    }
 }
