@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0ab3e0c7-8a57-4ef6-a621-1c33c304f29c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/ui/SearchPageObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/SearchPageObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/LessonFourTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/LessonFourTests.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tests/LessonFourTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="401">
-              <caret line="104" column="100" selection-start-line="104" selection-start-column="100" selection-end-line="104" selection-end-column="100" />
+            <state relative-caret-position="385">
+              <caret line="103" column="62" selection-start-line="103" selection-start-column="62" selection-end-line="103" selection-end-column="88" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -105,8 +103,8 @@
         <option value="$PROJECT_DIR$/src/lib/ui/MyListsPageObject.java" />
         <option value="$PROJECT_DIR$/src/lib/ui/ArticlePageObject.java" />
         <option value="$PROJECT_DIR$/src/tests/SearchTests.java" />
-        <option value="$PROJECT_DIR$/src/tests/LessonFourTests.java" />
         <option value="$PROJECT_DIR$/src/lib/ui/SearchPageObject.java" />
+        <option value="$PROJECT_DIR$/src/tests/LessonFourTests.java" />
       </list>
     </option>
   </component>
@@ -166,7 +164,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555456115139" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555456215736" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/selenium-server-standalone-3.4.0.jar!/" />
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -301,19 +299,17 @@
       <option name="project" value="LOCAL" />
       <updated>1555451111772</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Lesson4_exerc9">
+      <created>1555456180834</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1555456180834</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="LessonFourTests_testAssertTitle - 2019.04.17 at 00h 11m 41s.xml">
-      <configuration name="LessonFourTests.testAssertTitle" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LessonFourTests_testAssertTitle - 2019.04.17 at 00h 12m 28s.xml">
-      <configuration name="LessonFourTests.testAssertTitle" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LessonFourTests_testAssertTitle - 2019.04.17 at 00h 13m 04s.xml">
-      <configuration name="LessonFourTests.testAssertTitle" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="LessonFourTests_testAssertTitle - 2019.04.17 at 00h 18m 03s.xml">
       <configuration name="LessonFourTests.testAssertTitle" configurationId="JUnit" />
     </history-entry>
@@ -335,10 +331,18 @@
     <history-entry file="LessonFourTests_testSearchArticleByTitleAndDescription - 2019.04.17 at 02h 05m 47s.xml">
       <configuration name="LessonFourTests.testSearchArticleByTitleAndDescription" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="LessonFourTests_testSearchArticleByTitleAndDescription - 2019.04.17 at 02h 07m 19s.xml">
+      <configuration name="LessonFourTests.testSearchArticleByTitleAndDescription" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LessonFourTests_testSearchArticleByTitleAndDescription - 2019.04.17 at 02h 08m 23s.xml">
+      <configuration name="LessonFourTests.testSearchArticleByTitleAndDescription" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LessonFourTests_testSearchArticleByTitleAndDescription - 2019.04.17 at 02h 09m 05s.xml">
+      <configuration name="LessonFourTests.testSearchArticleByTitleAndDescription" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49919224" visible="true" weight="0.29637527" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -349,14 +353,14 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.32936078" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32827735" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" visible="true" weight="0.32827735" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -438,7 +442,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Lesson4_ex8" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lesson4_ex8" />
+    <MESSAGE value="Lesson4_exerc9" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lesson4_exerc9" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/MainClass.java" />
@@ -555,8 +560,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tests/LessonFourTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="104" column="100" selection-start-line="104" selection-start-column="100" selection-end-line="104" selection-end-column="100" />
+        <state relative-caret-position="385">
+          <caret line="103" column="62" selection-start-line="103" selection-start-column="62" selection-end-line="103" selection-end-column="88" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
