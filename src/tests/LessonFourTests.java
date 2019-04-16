@@ -90,6 +90,5 @@ public class LessonFourTests extends CoreTestCase {
                 By.id(title_element),
                 "The title element is not found in the article"
         );
-
     }
 }
