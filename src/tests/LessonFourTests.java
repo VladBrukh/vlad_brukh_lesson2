@@ -81,13 +81,13 @@ public class LessonFourTests extends CoreTestCase {
 
         MainPageObject MainPageObject = new MainPageObject(driver);
         MainPageObject.waitForElementPresent(
-                By.xpath("//*[contains(@text, '" + description + "')]"),
+                "//*[contains(@text, '" + description + "')]",
                 "The article with " + description + " is not opened",
                 15
         );
 
         MainPageObject.assertElementPresent(
-                By.id(title_element),
+                title_element,
                 "The title element is not found in the article"
         );
 
