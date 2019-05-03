@@ -1,12 +1,11 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
 
-public class NavigationUI extends MainPageObject {
+abstract public class NavigationUI extends MainPageObject {
 
-    private static final String
-            MY_LISTS_LINK = "xpath://android.widget.FrameLayout[@content-desc='My lists']";
+    protected static String
+            MY_LISTS_LINK;
 
     public NavigationUI(AppiumDriver driver) {
 
@@ -18,7 +17,7 @@ public class NavigationUI extends MainPageObject {
         this.waitForElementAndClick(
                 MY_LISTS_LINK,
                 "Cannot find navigation button to my lists",
-                25
+                5
         );
     }
 

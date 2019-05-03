@@ -2,11 +2,13 @@ package tests;
 
 import lib.CoreTestCase;
 import lib.ui.*;
+import lib.ui.factories.ArticlePageObjectFactory;
+import lib.ui.factories.MyListsPageObjectFactory;
+import lib.ui.factories.NavigationUIFactory;
 import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
-import org.openqa.selenium.By;
 
-public class LessonFourTests extends CoreTestCase {
+public class LessonSixTests extends CoreTestCase {
 
     @Test
     public void testSearchTwoArticleAndCancelSearch() {
@@ -34,7 +36,7 @@ public class LessonFourTests extends CoreTestCase {
         SearchPageObject.typeSearchLine("Dracula");
         SearchPageObject.clickByArticleWithSubstring("Dracula in popular culture");
 
-        ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
+        ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         ArticlePageObject.waitForTitleElement();
         String first_article_title = ArticlePageObject.getArticleTitle();
         String name_of_folder = "Dracula folder";
@@ -49,10 +51,10 @@ public class LessonFourTests extends CoreTestCase {
         ArticlePageObject.addSecondArticleToMyList(name_of_folder);
         ArticlePageObject.closeArticle();
 
-        NavigationUI NavigationUI = new NavigationUI(driver);
+        NavigationUI NavigationUI = NavigationUIFactory.get(driver);
         NavigationUI.clickMyLists();
 
-        MyListsPageObject MyListsPageObject = new MyListsPageObject(driver);
+        MyListsPageObject MyListsPageObject = MyListsPageObjectFactory.get(driver);
         MyListsPageObject.openFolderByName(name_of_folder);
         MyListsPageObject.swipeArticleToDelete(first_article_title);
         MyListsPageObject.waitForArticleToAppearByTitleAndClick(second_article_title);
