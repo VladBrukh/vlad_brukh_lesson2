@@ -7,7 +7,8 @@ abstract public class MyListsPageObject extends MainPageObject {
 
     protected static String
             FOLDER_BY_NAME_TPL,
-            ARTICLE_BY_TITLE_TPL;
+            ARTICLE_BY_TITLE_TPL,
+            ARTICLE_IN_LIST;
 
     private static String getFolderXpathByName(String name_of_folder) {
 
@@ -66,5 +67,13 @@ abstract public class MyListsPageObject extends MainPageObject {
         }
 
         this.waitForArticleToDisappearByTitle(article_title);
+    }
+
+    public int checkNumberOfArticlesInMyLists() {
+
+        this.waitForElementPresent(ARTICLE_IN_LIST, "Cannot find article container", 10);
+
+        int number_of_articles = this.getAmountOfElements(ARTICLE_IN_LIST);
+        return number_of_articles;
     }
 }

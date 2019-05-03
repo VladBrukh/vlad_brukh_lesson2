@@ -1,6 +1,7 @@
 package tests;
 
 import lib.CoreTestCase;
+import lib.Platform;
 import lib.ui.*;
 import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.MyListsPageObjectFactory;
@@ -27,6 +28,7 @@ public class LessonSixTests extends CoreTestCase {
 
     }
 
+    private static final String name_of_folder = "Dracula folder";
     @Test
     public void testSavingTwoArticlesToMyLists() {
 
@@ -39,35 +41,70 @@ public class LessonSixTests extends CoreTestCase {
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         ArticlePageObject.waitForTitleElement();
         String first_article_title = ArticlePageObject.getArticleTitle();
-        String name_of_folder = "Dracula folder";
-        ArticlePageObject.addArticleToMyList(name_of_folder);
+
+        if(Platform.getInstance().isAndroid()) {
+            ArticlePageObject.addArticleToMyList(name_of_folder);
+        } else {
+            ArticlePageObject.addArticlesToMySaved();
+        }
+
         ArticlePageObject.closeArticle();
 
         SearchPageObject.initSearchInput();
-        SearchPageObject.typeSearchLine("Dracula");
+
+        if(Platform.getInstance().isAndroid()) {
+            SearchPageObject.typeSearchLine("Dracula");
+        }
+
         SearchPageObject.clickByArticleWithSubstring("Dracula Untold");
-        ArticlePageObject.waitForTitleElement();
-        String second_article_title = ArticlePageObject.getArticleTitle();
-        ArticlePageObject.addSecondArticleToMyList(name_of_folder);
+
+        MyListsPageObject MyListsPageObject = MyListsPageObjectFactory.get(driver);
+
+        String second_article_title = null;
+        if(Platform.getInstance().isAndroid()) {
+            ArticlePageObject.waitForTitleElement();
+            second_article_title = ArticlePageObject.getArticleTitle();
+            ArticlePageObject.addSecondArticleToMyList(name_of_folder);
+        } else {
+            ArticlePageObject.addArticlesToMySaved();
+        }
+
         ArticlePageObject.closeArticle();
 
         NavigationUI NavigationUI = NavigationUIFactory.get(driver);
         NavigationUI.clickMyLists();
 
-        MyListsPageObject MyListsPageObject = MyListsPageObjectFactory.get(driver);
-        MyListsPageObject.openFolderByName(name_of_folder);
+        if (Platform.getInstance().isAndroid()) {
+            MyListsPageObject.openFolderByName(name_of_folder);
+        } else {
+            assertEquals(
+                    "The second article is not added!",
+                    2,
+                    MyListsPageObject.checkNumberOfArticlesInMyLists()
+            );
+        }
+
         MyListsPageObject.swipeArticleToDelete(first_article_title);
-        MyListsPageObject.waitForArticleToAppearByTitleAndClick(second_article_title);
 
-        ArticlePageObject.waitForTitleElement();
-        String second_article_title_opened_from_folder = ArticlePageObject.getArticleTitle();
+        if(Platform.getInstance().isAndroid()) {
+            MyListsPageObject.waitForArticleToAppearByTitleAndClick(second_article_title);
 
-        assertEquals(
-                "Titles do not match",
-                second_article_title,
-                second_article_title_opened_from_folder
-        );
+            ArticlePageObject.waitForTitleElement();
+            String second_article_title_opened_from_folder = ArticlePageObject.getArticleTitle();
 
+            assertEquals(
+                    "Titles do not match",
+                    second_article_title,
+                    second_article_title_opened_from_folder
+            );
+        } else {
+
+            assertEquals(
+                    "There are still two articles in the list!",
+                    MyListsPageObject.checkNumberOfArticlesInMyLists(),
+                    1
+            );
+        }
     }
 
     @Test
