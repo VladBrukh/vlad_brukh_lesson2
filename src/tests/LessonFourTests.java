@@ -2,6 +2,7 @@ package tests;
 
 import lib.CoreTestCase;
 import lib.ui.*;
+import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
@@ -10,7 +11,7 @@ public class LessonFourTests extends CoreTestCase {
     @Test
     public void testSearchTwoArticleAndCancelSearch() {
 
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);;
 
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Dracula");
@@ -27,7 +28,7 @@ public class LessonFourTests extends CoreTestCase {
     @Test
     public void testSavingTwoArticlesToMyLists() {
 
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);;
 
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Dracula");
@@ -70,7 +71,7 @@ public class LessonFourTests extends CoreTestCase {
     @Test
     public void testAssertTitle() {
 
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);;
 
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Dracula");
@@ -90,6 +91,18 @@ public class LessonFourTests extends CoreTestCase {
                 title_element,
                 "The title element is not found in the article"
         );
+    }
+
+    @Test
+    public void testSearchArticleByTitleAndDescription () {
+
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);;
+
+        SearchPageObject.initSearchInput();
+        SearchPageObject.typeSearchLine("Dracula");
+        SearchPageObject.waitForElementByTitleAndDescription("Dracula Untold", "2014 American dark fantasy action horror film directed by Gary Shore");
+        SearchPageObject.waitForElementByTitleAndDescription("Dracula in popular culture", "Wikimedia list article");
+        SearchPageObject.waitForElementByTitleAndDescription("Dracula (1924 play)", "1924 stage play");
 
     }
 }
