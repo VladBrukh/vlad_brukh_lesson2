@@ -96,9 +96,9 @@ public class LessonSixTests extends CoreTestCase {
     }
 
     @Test
-    public void testSearchArticleByTitleAndDescription () {
+    public void testSearchArticleByTitleAndDescription() {
 
-        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);;
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Dracula");
